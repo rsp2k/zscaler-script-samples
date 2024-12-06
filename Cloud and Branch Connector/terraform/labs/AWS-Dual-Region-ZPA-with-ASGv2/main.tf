@@ -301,7 +301,7 @@ resource "aws_route_table_association" "routetablepublic2" {
 resource "aws_eip" "eip" {
   provider = aws.region1
   count      = length(aws_subnet.pubsubnet.*.id)
-  vpc        = true
+  domain     = "vpc"
   depends_on = [aws_internet_gateway.igw1]
 
   tags = merge(local.global_tags,
@@ -312,7 +312,7 @@ resource "aws_eip" "eip" {
 resource "aws_eip" "eip2" {
   provider = aws.region2
   count      = length(aws_subnet.pubsubnet2.*.id)
-  vpc        = true
+  domain     = "vpc"
   depends_on = [aws_internet_gateway.igw2]
 
   tags = merge(local.global_tags,
